@@ -42,46 +42,24 @@ public class CoffeeMaker {
         return water > MIN_WATER && coffee > MIN_COFFEE;
     }
 
-    public Action makeCoffee() {
-        String actionMessage;
+    public void makeCoffee() {
         if (isReady()) {
-            actionMessage = "Кофе сварен";
             coffee = 0;
             water = 0;
         }
-        else
-            actionMessage = "Недостаточно ингредиентов";
-        return new Action(new Date().toString(), actionMessage);
-
     }
 
-    public Action addWater(int w) {
-
+    public void addWater(int w) {
         water += w;
-
-        String actionMessage = "Налили " + w + " мл воды";
-
         if(water > MAX_WATER) {
-            actionMessage += "Вылилось " + (water - MAX_WATER) + " мл воды";
             water = MAX_WATER;
         }
-        actionMessage += "Текущий уровень:" + water + " мл воды";
-
-        return new Action(new Date().toString(), actionMessage);
     }
 
-    public Action addCoffee(int c) {
+    public void addCoffee(int c) {
         coffee += c;
-
-        String actionMessage = "Насыпали " + c + "г кофе.";
-
         if(coffee > MAX_COFFEE) {
-
-            actionMessage += " Высыпалось " + (coffee - MAX_COFFEE) + " г кофе";
             coffee = MAX_COFFEE;
         }
-        actionMessage += "Текущий уровень:" + coffee + " г кофе";
-
-        return new Action(new Date().toString(), actionMessage);
     }
 }
