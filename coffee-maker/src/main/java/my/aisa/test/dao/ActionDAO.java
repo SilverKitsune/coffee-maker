@@ -3,14 +3,19 @@ package my.aisa.test.dao;
 import my.aisa.test.models.Action;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class ActionDAO {
-    private List<Action> actions;
+    private List<Action> actions = new ArrayList<>();
 
-    public void add() {}
+    public void add(Action action) {
+        actions.add(action);
+    }
 
-    public void show() {}
+    public List<Action> index() {
+        return actions;
+    }
 
 }
