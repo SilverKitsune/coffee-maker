@@ -1,5 +1,11 @@
 package my.aisa.test.models;
 
+import java.util.Date;
+
+///TODO(разобраться с датами)
+///TODO(посчитать сваренный кофе)
+///TODO(избавиться от повторений)
+
 public class CoffeeMaker {
 
     private String name;
@@ -28,53 +34,54 @@ public class CoffeeMaker {
         MIN_WATER = min_water;
     }
 
-    public int getCoffee() {
-        return coffee;
-    }
-
-    public int getWater() {
-        return water;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void turnOn() {
-        if (isReady())
-            System.out.println("Варит кофе");
-
-    }
-
-    public void addWater(int w) {
-        water += w;
-        //System.out.println("Налили " + w + " мл воды");
-        if(water > MAX_WATER) {
-            //System.out.println("Вылилось " + (water - MAX_WATER) + " мл воды");
-            water = MAX_WATER;
-        }
     }
 
     private boolean isReady() {
         return water > MIN_WATER && coffee > MIN_COFFEE;
     }
 
-    public void addCoffee(int c) {
-        coffee += c;
-        //System.out.println("Насыпали " + c + "г кофе");
-        if(coffee > MAX_COFFEE) {
-            //System.out.println("Высыпалось " + (coffee - MAX_COFFEE) + " г кофе");
-            coffee = MAX_COFFEE;
+    public Action makeCoffee() {
+        String actionMessage;
+        if (isReady()) {
+            actionMessage = "Кофе сварен";
+            coffee = 0;
+            water = 0;
         }
+        else
+            actionMessage = "Недостаточно ингредиентов";
+        return new Action(new Date().toString(), actionMessage);
+
     }
 
-    public void takeCoffee() {
-        coffee = 0;
-        water = 0;
-        //System.out.println("Можно сварить еще кофе");
+    public Action addWater(int w) {
+
+        water += w;
+
+        String actionMessage = "Налили " + w + " мл воды";
+
+        if(water > MAX_WATER) {
+            actionMessage += "Вылилось " + (water - MAX_WATER) + " мл воды";
+            water = MAX_WATER;
+        }
+        actionMessage += "Текущий уровень:" + water + " мл воды";
+
+        return new Action(new Date().toString(), actionMessage);
+    }
+
+    public Action addCoffee(int c) {
+        coffee += c;
+
+        String actionMessage = "Насыпали " + c + "г кофе.";
+
+        if(coffee > MAX_COFFEE) {
+
+            actionMessage += " Высыпалось " + (coffee - MAX_COFFEE) + " г кофе";
+            coffee = MAX_COFFEE;
+        }
+        actionMessage += "Текущий уровень:" + coffee + " г кофе";
+
+        return new Action(new Date().toString(), actionMessage);
     }
 }
