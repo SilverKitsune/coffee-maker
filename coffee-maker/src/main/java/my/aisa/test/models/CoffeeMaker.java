@@ -1,29 +1,51 @@
 package my.aisa.test.models;
 
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-///TODO(разобраться с датами)
-///TODO(посчитать сваренный кофе)
-///TODO(избавиться от повторений)
-
+@Entity
+@Table(name="coffeemakers")
 public class CoffeeMaker {
 
+    //Название кофеварки
+    @Id
+    @Column(name = "name")
     private String name;
 
     //количество кофе в граммах
+    @Column(name = "coffee")
     private int coffee;
 
     //объем воды в миллилитрах
+    @Column(name = "water")
     private int water;
 
     //количество сделаных чашек кофе
+    @Column(name = "cupscount")
     private int cupsCount;
 
-    public final int MAX_COFFEE;/* = 30*/
-    public final int MIN_COFFEE; /*= 8*/
+    //максимальная вместительность
+    @Column(name = "max_coffee")
+    public final int MAX_COFFEE;
 
-    public final int MAX_WATER;// = 500
-    public final int MIN_WATER;// = 125
+    @Column(name = "max_water")
+    public final int MAX_WATER;
+
+    //необходимый минимум для приготовления кофе
+    @Column(name = "min_coffee")
+    public final int MIN_COFFEE;
+
+    @Column(name = "min_water")
+    public final int MIN_WATER;
+
+    public CoffeeMaker() {
+        MIN_WATER = 100;
+        MAX_WATER = 500;
+        MIN_COFFEE = 6;
+        MAX_COFFEE = 30;
+    }
 
     public CoffeeMaker(String name,
                        int max_coffee,
@@ -53,6 +75,13 @@ public class CoffeeMaker {
         return water > MIN_WATER && coffee > MIN_COFFEE;
     }
 
+
+    /**
+     * Имитация приготовления кофе. Все что было в резервуарах обнуляется,
+     * а количество приготовленных кружек увеличивается в зависимости от объема воды.
+     * @return true - если кофе и воды достаточно для варки кофе,
+     *         false - если не хватает кофе или воды.
+     */
     public boolean makeCoffee() {
         if (isReady()) {
             cupsCount+= water / MIN_WATER;
@@ -60,10 +89,14 @@ public class CoffeeMaker {
             water = 0;
             return true;
         }
-
         return false;
     }
 
+    /**
+     *  Добавляет указанный объем воды в кофеварку. Если итоговый объем больше MAX_WATER,
+     *  то лишняя вода "выливается" и значение остается равным MAX_WATER.
+     * @param w - добавляемый объем воды
+     */
     public void addWater(int w) {
         water += w;
         if(water > MAX_WATER) {
@@ -71,6 +104,11 @@ public class CoffeeMaker {
         }
     }
 
+    /**
+     *  Добавляет указанное количество кофе в кофеварку. Если итоговый вес больше MAX_COFFEE,
+     *  то лишнее "высыпается" и значение остается равным MAX_COFFEE.
+     * @param c - добавляемый вес кофе
+     */
     public void addCoffee(int c) {
         coffee += c;
         if(coffee > MAX_COFFEE) {
@@ -78,6 +116,9 @@ public class CoffeeMaker {
         }
     }
 
+    /**
+     * Опустошение кофеварки
+     */
     public void makeEmpty() {
         coffee = 0;
         water = 0;
