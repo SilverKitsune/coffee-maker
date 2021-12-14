@@ -83,14 +83,15 @@ public class CoffeeMaker {
      * @return true - если кофе и воды достаточно для варки кофе,
      *         false - если не хватает кофе или воды.
      */
-    public boolean makeCoffee() {
+    public int makeCoffee() {
         if (isReady()) {
-            cupsCount+= water / MIN_WATER;
+            int count =  water / MIN_WATER;
+            cupsCount += count;
             coffee = 0;
             water = 0;
-            return true;
+            return count;
         }
-        return false;
+        return 0;
     }
 
     /**

@@ -51,7 +51,7 @@ public class CoffeeMakerController {
     @GetMapping("/makeCoffee")
     @Operation(summary = "Производство напитка", description = "Варит кофе")
     public HttpStatus makeCoffee() {
-        if(coffeeMakerDAO.makeCoffee()) {
+        if(coffeeMakerDAO.makeCoffee() > 0) {
             return HttpStatus.OK;
         }
         return HttpStatus.BAD_REQUEST;
