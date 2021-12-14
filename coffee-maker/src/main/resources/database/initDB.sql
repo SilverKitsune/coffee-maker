@@ -11,6 +11,6 @@ CREATE TABLE IF NOT EXISTS coffeeMakers
 );
 CREATE TABLE IF NOT EXISTS actions
 (
-    date VARCHAR(200) PRIMARY KEY ,
+    date DATE PRIMARY KEY ,
     message VARCHAR(200) NOT NULL
 );
