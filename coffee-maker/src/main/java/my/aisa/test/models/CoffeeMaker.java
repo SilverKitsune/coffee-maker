@@ -37,6 +37,14 @@ public class CoffeeMaker {
         MIN_WATER = min_water;
     }
 
+    public int getCoffee() {
+        return coffee;
+    }
+
+    public int getWater() {
+        return water;
+    }
+
     public String getName() {
         return name;
     }
@@ -45,12 +53,15 @@ public class CoffeeMaker {
         return water > MIN_WATER && coffee > MIN_COFFEE;
     }
 
-    public void makeCoffee() {
+    public boolean makeCoffee() {
         if (isReady()) {
             cupsCount+= water / MIN_WATER;
             coffee = 0;
             water = 0;
+            return true;
         }
+
+        return false;
     }
 
     public void addWater(int w) {
@@ -58,7 +69,6 @@ public class CoffeeMaker {
         if(water > MAX_WATER) {
             water = MAX_WATER;
         }
-        System.out.println(w);
     }
 
     public void addCoffee(int c) {
@@ -66,7 +76,6 @@ public class CoffeeMaker {
         if(coffee > MAX_COFFEE) {
             coffee = MAX_COFFEE;
         }
-        System.out.println(c);
     }
 
     public void makeEmpty() {

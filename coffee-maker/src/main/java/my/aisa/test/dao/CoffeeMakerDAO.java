@@ -1,6 +1,4 @@
 package my.aisa.test.dao;
-
-
 import my.aisa.test.models.CoffeeMaker;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +13,8 @@ public class CoffeeMakerDAO {
         coffeeMaker = new CoffeeMaker("Tefal", 30, 500, 100, 6);
     }
 
-    public void makeCoffee() {
-        coffeeMaker.makeCoffee();
+    public boolean makeCoffee() {
+        return coffeeMaker.makeCoffee();
     }
 
     public void addWater(int water) {
@@ -33,5 +31,13 @@ public class CoffeeMakerDAO {
 
     public CoffeeMaker currentState() {
         return coffeeMaker;
+    }
+
+    public int getWater() {
+        return coffeeMaker.getWater();
+    }
+
+    public int getCoffee() {
+        return coffeeMaker.getCoffee();
     }
 }
