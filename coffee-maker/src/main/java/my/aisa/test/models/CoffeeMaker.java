@@ -16,6 +16,9 @@ public class CoffeeMaker {
     //объем воды в миллилитрах
     private int water;
 
+    //количество сделаных чашек кофе
+    private int cupsCount;
+
     public final int MAX_COFFEE;/* = 30*/
     public final int MIN_COFFEE; /*= 8*/
 
@@ -44,6 +47,7 @@ public class CoffeeMaker {
 
     public void makeCoffee() {
         if (isReady()) {
+            cupsCount+= water / MIN_WATER;
             coffee = 0;
             water = 0;
         }
@@ -54,6 +58,7 @@ public class CoffeeMaker {
         if(water > MAX_WATER) {
             water = MAX_WATER;
         }
+        System.out.println(w);
     }
 
     public void addCoffee(int c) {
@@ -61,5 +66,19 @@ public class CoffeeMaker {
         if(coffee > MAX_COFFEE) {
             coffee = MAX_COFFEE;
         }
+        System.out.println(c);
+    }
+
+    public void makeEmpty() {
+        coffee = 0;
+        water = 0;
+    }
+
+    public int getCupsCount() {
+        return cupsCount;
+    }
+
+    public void setCupsCount(int cupsCount) {
+        this.cupsCount = cupsCount;
     }
 }

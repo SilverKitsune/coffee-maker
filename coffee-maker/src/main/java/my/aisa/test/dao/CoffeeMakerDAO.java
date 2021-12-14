@@ -26,4 +26,12 @@ public class CoffeeMakerDAO {
     public void addCoffee(int coffee) {
         coffeeMaker.addCoffee(coffee);
     }
+
+    public void makeEmpty() {
+        coffeeMaker.makeEmpty();
+    }
+
+    public CoffeeMaker currentState() {
+        return coffeeMaker;
+    }
 }
