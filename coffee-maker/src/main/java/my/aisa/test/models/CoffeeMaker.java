@@ -41,6 +41,7 @@ public class CoffeeMaker {
     public final int MIN_WATER;
 
     public CoffeeMaker() {
+        name = "Tefal";
         MIN_WATER = 100;
         MAX_WATER = 500;
         MIN_COFFEE = 6;
