@@ -7,6 +7,10 @@ import javax.persistence.Table;
 import java.util.Date;
 
 
+/**
+ * Action - это запись действия, произведенного над кофеваркой.
+ * Действие содержит в себе время его выполнения и сообщение показывающее, что это было за действие.
+ */
 @Entity
 @Table(name = "actions")
 public class Action {
